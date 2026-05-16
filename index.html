@@ -469,13 +469,109 @@
       50%       { box-shadow: 0 0 40px rgba(229,9,20,0.28); }
     }
 
+    /* ─── HAMBURGER BUTTON ─── */
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center;
+      gap: 5px; width: 36px; height: 36px;
+      background: none; border: none; cursor: pointer;
+      padding: 4px; z-index: 601;
+    }
+    .hamburger span {
+      display: block; height: 1.5px; width: 100%;
+      background: var(--text); border-radius: 2px;
+      transition: transform 0.35s ease, opacity 0.3s ease, width 0.3s ease;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ─── MOBILE DRAWER ─── */
+    .drawer-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 598; opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .drawer-overlay.open { display: block; opacity: 1; }
+
+    .drawer {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: min(80vw, 300px);
+      background: #0d0d13;
+      border-left: 1px solid var(--glass-b);
+      z-index: 599;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: flex; flex-direction: column;
+      padding: 0;
+    }
+    .drawer.open { transform: translateX(0); }
+
+    .drawer-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 24px 18px;
+      border-bottom: 1px solid var(--glass-b);
+    }
+    .drawer-logo { font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; }
+    .drawer-logo span { color: var(--accent); }
+    .drawer-close {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--glass); border: 1px solid var(--glass-b);
+      color: var(--muted-2); font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.2s, color 0.2s;
+    }
+    .drawer-close:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .drawer-nav {
+      display: flex; flex-direction: column;
+      padding: 12px 0; flex: 1;
+    }
+    .drawer-nav a {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 24px;
+      color: var(--muted-2); font-size: 1rem; font-weight: 500;
+      border-bottom: 1px solid var(--glass-b);
+      transition: color 0.2s, background 0.2s, padding-left 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .drawer-nav a:last-child { border-bottom: none; }
+    .drawer-nav a::after {
+      content: '→'; font-size: 0.85rem;
+      color: var(--muted); opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+      transform: translateX(-6px);
+    }
+    .drawer-nav a:hover {
+      color: var(--text);
+      background: rgba(229,9,20,0.05);
+      padding-left: 30px;
+    }
+    .drawer-nav a:hover::after { opacity: 1; transform: translateX(0); }
+
+    .drawer-nav .drawer-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem; color: var(--accent); opacity: 0.7;
+      margin-right: 10px;
+    }
+    .drawer-footer {
+      padding: 20px 24px;
+      border-top: 1px solid var(--glass-b);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem; color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       .navbar, section.section, footer { padding-left: 24px; padding-right: 24px; }
       .hero { padding: 110px 24px 70px; }
       .hero-name { font-size: 2.6rem; }
-      .nav-links { gap: 16px; }
-      .nav-links a { font-size: 0.75rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
     }
   </style>
 </head>
@@ -502,7 +598,28 @@
       <a href="#skills">Skills</a>
       <a href="#contact">Contact</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" onclick="toggleDrawer()">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+  <div class="drawer" id="drawer">
+    <div class="drawer-header">
+      <div class="drawer-logo">SHAJEE<span>.</span>RAZA</div>
+      <button class="drawer-close" onclick="closeDrawer()">✕</button>
+    </div>
+    <nav class="drawer-nav">
+      <a href="#experience" onclick="closeDrawer()"><span><span class="drawer-num">01 /</span> Experience</span></a>
+      <a href="#projects" onclick="closeDrawer()"><span><span class="drawer-num">02 /</span> Projects</span></a>
+      <a href="#research" onclick="closeDrawer()"><span><span class="drawer-num">03 /</span> Research</span></a>
+      <a href="#education" onclick="closeDrawer()"><span><span class="drawer-num">04 /</span> Education</span></a>
+      <a href="#skills" onclick="closeDrawer()"><span><span class="drawer-num">05 /</span> Skills</span></a>
+      <a href="#contact" onclick="closeDrawer()"><span><span class="drawer-num">06 /</span> Contact</span></a>
+    </nav>
+    <div class="drawer-footer">AI ENGINEER &amp; RESEARCHER · 2026</div>
+  </div>
 
   <!-- ─── HERO ─── -->
   <section class="hero">
@@ -1186,7 +1303,29 @@
     if (e.target === document.getElementById('modalOverlay')) closeModal();
   }
 
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal(); closeDrawer(); }
+  });
+
+  /* ══════════════════════════════════════════════
+     MOBILE DRAWER
+  ══════════════════════════════════════════════ */
+  function toggleDrawer() {
+    const open = document.getElementById('drawer').classList.contains('open');
+    open ? closeDrawer() : openDrawer();
+  }
+  function openDrawer() {
+    document.getElementById('drawer').classList.add('open');
+    document.getElementById('drawerOverlay').classList.add('open');
+    document.getElementById('hamburger').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    document.getElementById('drawer').classList.remove('open');
+    document.getElementById('drawerOverlay').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow = '';
+  }
   </script>
 </body>
 </html>
