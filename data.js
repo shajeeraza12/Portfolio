@@ -199,6 +199,12 @@ window.PORTFOLIO = {
               "third of cases per setup the loop made the answer worse; pylint-6506 fell " +
               "from 0.92 to 0.20 after three rounds. Next step: compare rubric scores with " +
               "real test pass rates.",
+      shots: [
+        { src: "assets/results/thesis-paired.webp", cap: "Round 2: change in score for each of 50 instances after adding the reviewer (green = improved, red = regressed)" },
+        { src: "assets/results/thesis-dist.webp", cap: "Round 2: score distribution without (A) and with (B) the reviewer loop" },
+        { src: "assets/results/thesis-round3.webp", cap: "Round 3: single-pass vs reviewer loop for six generator and judge pairs" },
+        { src: "assets/results/thesis-condc.webp", cap: "Setup C with OpenHands at threshold 0.85: most instances score high, with a regression tail" }
+      ],
       links: [
         { label: "Thesis report", url: "https://drive.google.com/file/d/1oGFL9PrzZ18lWPd06yw2v4uJPEUrvZvN/view?usp=sharing", kind: "pdf" },
         { label: "Code on GitHub", url: "https://github.com/shajeeraza12/Multi-Agent-Study-Coding-Assistant", kind: "code" }
@@ -352,6 +358,12 @@ window.PORTFOLIO = {
         { value: "3", label: "tools" },
         { value: "3", label: "courses + thesis" }
       ],
+      shots: [
+        { src: "assets/results/mas-graph.webp", cap: "The LangGraph workflow: router, supervisor and specialist agents" },
+        { src: "assets/results/mas-agents.webp", cap: "The seven agents and their roles" },
+        { src: "assets/results/mas-chat.webp", cap: "The Streamlit interface answering a C++ coding question" },
+        { src: "assets/results/mas-api.webp", cap: "The FastAPI backend: system, chat and knowledge-base endpoints" }
+      ],
       links: [
         { label: "Code on GitHub", url: "https://github.com/shajeeraza12/Multi-Agent-Study-Coding-Assistant", kind: "code" },
         { label: "Demo video", url: "https://drive.google.com/file/d/1oicWSLwUlv9RuMbwbWc-MXA9B60gzzij/view?usp=drive_link", kind: "video" }
@@ -370,6 +382,12 @@ window.PORTFOLIO = {
         "Trained a Random Forest regressor (50 trees) in Spark MLlib to predict genre popularity by year, with an RMSE of 3.63, and used it to forecast the top genres for 2026: Adventure, Action, Family, Mystery and Fantasy."
       ],
       metrics: [ { value: "400K+", label: "records" }, { value: "3.63", label: "RMSE" } ],
+      shots: [
+        { src: "assets/results/tmdb-genres2026.webp", cap: "Random Forest forecast of the most popular genres for 2026" },
+        { src: "assets/results/tmdb-actors.webp", cap: "Actors with the most films in 2023, from the Spark analysis" },
+        { src: "assets/results/tmdb-grossing.webp", cap: "Highest-grossing films in the dataset" },
+        { src: "assets/results/tmdb-pipeline.webp", cap: "Pipeline: Parquet files, Spark DataFrames, cleaning, analysis, visualisation" }
+      ],
       links: [
         { label: "Code on GitHub", url: "https://github.com/shajeeraza12/TMDB-Movie-Analysis", kind: "code" }
       ]
@@ -396,6 +414,11 @@ window.PORTFOLIO = {
         "Bitcoin forecast error rose from 1.77% MAPE at 7 days to 10.5% at 30 days, showing how errors build up over longer horizons."
       ],
       metrics: [ { value: "1.77%", label: "MAPE, 7 days" }, { value: "10.5%", label: "MAPE, 30 days" } ],
+      shots: [
+        { src: "assets/results/timellm-btc.webp", cap: "Bitcoin: Time-LLM forecast (green) against actual prices (orange) over the last 30 days" },
+        { src: "assets/results/timellm-nordpool.webp", cap: "Nord Pool electricity prices: history, test period and forecast" },
+        { src: "assets/results/timellm-de.webp", cap: "German electricity prices: history, test period and forecast" }
+      ],
       links: [] },
     { id: "rl", track: "both", featured: false,
       tag: "Ray RLlib · Gymnasium · Stable-Baselines3", period: "Autumn 2025",
@@ -407,6 +430,13 @@ window.PORTFOLIO = {
         "Behaviour cloning on HalfCheetah from a 1,000-episode expert dataset, using the imitation library."
       ],
       metrics: [ { value: "419", label: "Space Invaders return" }, { value: "1M", label: "env steps" } ],
+      shots: [
+        { src: "assets/results/spaceinvaders.mp4", cap: "My trained PPO agent playing Space Invaders", video: true, poster: "assets/results/spaceinvaders-poster.jpg" },
+        { src: "assets/results/halfcheetah.mp4", cap: "The behaviour cloning policy running HalfCheetah", video: true, poster: "assets/results/halfcheetah-poster.jpg" },
+        { src: "assets/results/rl-spaceinvaders.webp", cap: "Space Invaders: average episode return over training" },
+        { src: "assets/results/rl-breakout.webp", cap: "Breakout: average episode return over training" },
+        { src: "assets/results/rl-bc-loss.webp", cap: "Behaviour cloning loss on HalfCheetah over 50 epochs" }
+      ],
       links: [] },
     { id: "titanic", track: "engineering", featured: false, tag: "ML · classification",
       title: "Titanic: ML from Disaster",
@@ -414,6 +444,9 @@ window.PORTFOLIO = {
       points: [
         "Implemented Logistic Regression, Random Forest and Gradient Boosted Trees.",
         "Evaluated with accuracy, precision, recall, F1 and log loss."
+      ],
+      shots: [
+        { src: "assets/results/titanic-cm.webp", cap: "Confusion matrix on the held-out passengers" }
       ],
       links: [ { label: "Colab notebook", url: "https://colab.research.google.com/drive/1p1p0m9B77hXrsk1v-EIduMXjXjzZ0bkK", kind: "code" } ] },
     { id: "pieas-chatbot", track: "both", featured: false, tag: "NLP · deep learning",
@@ -493,13 +526,13 @@ window.PORTFOLIO = {
   coursework: [
     { tag: "Neural Network Architectures", title: "LLM prompting and fine-tuning",
       text: "Qwen2.5-7B served with vLLM. Compared naive, few-shot, chain-of-thought and role prompting on BoolQ (chain-of-thought best, 0.61 accuracy vs 0.51 naive), then set up 4-bit LoRA fine-tuning with Unsloth." },
-    { tag: "Neural Network Architectures · Advanced ML", title: "Generative models from scratch",
+    { tag: "Neural Network Architectures · Advanced ML", title: "Generative models from scratch", img: "assets/results/cw-vae.webp", cap: "VAE on LFW faces: original, reconstruction, and the same face edited in latent space",
       text: "A diffusion text-to-image model with time embeddings and a U-Net, a DCGAN in PyTorch, and a convolutional VAE trained on the LFW faces dataset." },
-    { tag: "Advanced ML", title: "Interpretable credit-risk model",
+    { tag: "Advanced ML", title: "Interpretable credit-risk model", img: "assets/results/cw-shap.webp", cap: "SHAP summary: which features drive the default prediction",
       text: "Logistic regression, random forest and XGBoost on the UCI credit-default data (XGBoost 0.76 ROC AUC), explained with SHAP, LIME and eli5." },
-    { tag: "Advanced ML", title: "SARIMA vs LSTM demand forecasting",
+    { tag: "Advanced ML", title: "SARIMA vs LSTM demand forecasting", img: "assets/results/cw-sarima.webp", cap: "SARIMA (red) and LSTM (green) forecasts against actual weekly sales",
       text: "Weekly store demand forecast over a 52-week horizon. SARIMA reached 7.88% MAPE and R² 0.78; a multi-step LSTM reached 14.6% and R² 0.12." },
-    { tag: "Optimisation Methods", title: "Combinatorial and multi-objective optimisation",
+    { tag: "Optimisation Methods", title: "Combinatorial and multi-objective optimisation", img: "assets/results/cw-pareto.webp", cap: "Pareto front: exact ε-constraint method vs NSGA-II",
       text: "0/1 knapsack with dynamic programming vs simulated annealing, and site selection with an exact ε-constraint method vs NSGA-II, without optimisation libraries." },
     { tag: "Neural Network Architectures", title: "CNN from scratch in NumPy",
       text: "Convolution and pooling layers with forward and backward passes, written without a deep learning framework." }
