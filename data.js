@@ -415,7 +415,7 @@ window.PORTFOLIO = {
         "Implemented Logistic Regression, Random Forest and Gradient Boosted Trees.",
         "Evaluated with accuracy, precision, recall, F1 and log loss."
       ],
-      links: [ { label: "Colab notebook", url: "https://colab.research.google.com/drive/1p1p0m9B77hXrsk1v-ElduMXjXjzZ0bkK", kind: "code" } ] },
+      links: [ { label: "Colab notebook", url: "https://colab.research.google.com/drive/1p1p0m9B77hXrsk1v-EIduMXjXjzZ0bkK", kind: "code" } ] },
     { id: "pieas-chatbot", track: "both", featured: false, tag: "NLP · deep learning",
       title: "PIEAS FAQ Chatbot",
       lede: "A deep autoencoder chatbot that answers student admission and campus questions.",
