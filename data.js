@@ -73,7 +73,7 @@ window.PORTFOLIO = {
       lines: [
         ["Looking for", "AI and LLM engineering roles, especially agentic systems"],
         ["Builds with", "LangGraph, LangChain, PyTorch, FastAPI, Spark, ChromaDB, Docker"],
-        ["Has shipped", "A multi-agent assistant, Spark shutdown tooling at ITMO NCCR, internal copilots at Headstart"],
+        ["Has shipped", "A seven-agent LangGraph assistant, Spark shutdown tooling at ITMO NCCR, internal copilots at Headstart"],
         ["Experience",  "3+ years across four roles, research and engineering"],
         ["Based in",    "Islamabad, Pakistan"],
         ["Available",   "Immediately"]
@@ -334,20 +334,23 @@ window.PORTFOLIO = {
     {
       id: "multiagent", track: "both", featured: true, visual: "graph",
       tag: "LangGraph · LangChain · ChromaDB · FastAPI · Streamlit",
-      period: "Oct 2025 – Jan 2026",
+      period: "Oct 2025 – Jun 2026",
       title: "Multi-Agent Study & Coding Assistant",
-      lede: "Sends each question to a specialist agent for research, coding, writing " +
-            "or study help, and is being extended to create new agents for multimodal " +
-            "question answering.",
+      lede: "A seven-agent LangGraph system that routes each question to the right " +
+            "workflow: research, coding or study help. I built it in phases across three " +
+            "master's courses, and it became the base system for my thesis.",
       points: [
-        "A supervisor agent works out what the user needs and passes the query to the right specialist.",
-        "Persistent memory in ChromaDB, plus live web search.",
-        "A sandbox for running generated code safely.",
-        "FastAPI backend and Streamlit interface. Pydantic checks the data passed between agents.",
-        "Current work: letting the system create new specialist agents for multimodal questions."
+        "<strong>Seven agents:</strong> a router that classifies intent and answer depth, a supervisor that runs complex workflows, a researcher, a writer, a critiquer, a code helper and a quiz helper.",
+        "<strong>Research workflow:</strong> the supervisor runs a research, write and critique loop, revising up to three times until the critiquer approves the answer.",
+        "<strong>Tools:</strong> Tavily web search, sandboxed Python, C and C++ code execution, and retrieval over uploaded PDFs and notes.",
+        "<strong>Memory:</strong> long-term memory in ChromaDB and the file system, short-term chat history in the shared LangGraph state.",
+        "<strong>Interface:</strong> a FastAPI backend with <code>/chat</code> and <code>/upload_pdf</code> endpoints, and a Streamlit web app.",
+        "<strong>Built in phases:</strong> the core system for Machine Learning for Industrial Data, the agent workflow for Advanced NLP, and automatic agent generation for multimodal question answering in my third-semester research internship. My thesis added the reviewer agent and hallucination detection on top."
       ],
       metrics: [
-        { value: "4", label: "specialist agents" }
+        { value: "7", label: "specialised agents" },
+        { value: "3", label: "tools" },
+        { value: "3", label: "courses + thesis" }
       ],
       links: [
         { label: "Code on GitHub", url: "https://github.com/shajeeraza12/Multi-Agent-Study-Coding-Assistant", kind: "code" },
@@ -356,21 +359,55 @@ window.PORTFOLIO = {
     },
     {
       id: "tmdb", track: "engineering", featured: true, visual: "scale",
-      tag: "Apache Spark · MLlib · Parquet",
+      tag: "Apache Spark · MLlib · Parquet · Python",
       title: "TMDB Big Data Pipeline",
-      lede: "A Spark pipeline that processes 400,000+ movie records, from raw nested " +
-            "JSON to a genre forecasting model.",
+      lede: "An end-to-end pipeline that collected 400,000+ movie records from the TMDB " +
+            "API, processed them in Spark and forecast genre popularity for 2026.",
       points: [
-        "Used Apache Spark to normalise nested JSON fields, handle nulls and store the results as Parquet.",
-        "Ran exploratory data analysis on the full dataset.",
-        "Trained a Random Forest genre classifier in Spark MLlib to forecast genre demand."
+        "Built a multi-threaded, rate-limited downloader that fetched about 427,000 movie records from the TMDB API, with checkpointing so it could resume after interruptions.",
+        "Saved the data in Parquet batches and combined them into one dataset of about 400,000 records.",
+        "Cleaned and analysed it in Apache Spark: nested JSON fields, genres and cast exploded into rows, and ROI analysis on big-budget films.",
+        "Trained a Random Forest regressor (50 trees) in Spark MLlib to predict genre popularity by year, with an RMSE of 3.63, and used it to forecast the top genres for 2026: Adventure, Action, Family, Mystery and Fantasy."
       ],
-      metrics: [ { value: "400K+", label: "records" } ],
-      // TODO: model accuracy or F1, and pipeline runtime, would help here.
+      metrics: [ { value: "400K+", label: "records" }, { value: "3.63", label: "RMSE" } ],
       links: [
         { label: "Code on GitHub", url: "https://github.com/shajeeraza12/TMDB-Movie-Analysis", kind: "code" }
       ]
     },
+    { id: "research-agent", track: "both", featured: false,
+      tag: "LangGraph · Pydantic · DeepSeek", period: "Autumn 2025",
+      title: "LangGraph Research Assistant Agent",
+      lede: "An agent that plans a literature search, queries arXiv and Crossref, writes a summary and reviews its own output.",
+      points: [
+        "A LangGraph pipeline with planner, ReAct decider, tool executor, writer and reviewer nodes.",
+        "Tools for arXiv and Crossref search; Pydantic models define the data passed between nodes.",
+        "A retry wrapper with exponential backoff for unreliable API calls.",
+        "The reviewer scores the final report; the example run scored 83% and suggested follow-up research directions."
+      ],
+      metrics: [ { value: "5", label: "graph nodes" }, { value: "83%", label: "review score" } ],
+      links: [] },
+    { id: "timellm", track: "research", featured: false,
+      tag: "LLMs · time series · PyTorch", period: "Autumn 2025",
+      title: "Time-LLM: Forecasting with a Frozen LLM",
+      lede: "Applied Time-LLM (Jin et al., ICLR 2024), which reprograms a frozen language model to forecast time series, to electricity prices and Bitcoin.",
+      points: [
+        "Studied the method's patch reprogramming and Prompt-as-Prefix mechanism, which let a frozen LLM read numeric series without fine-tuning.",
+        "Ran it on hourly day-ahead electricity prices for several European markets (Belgium, Germany, France, Nord Pool) and on daily BTC/USD closing prices.",
+        "Bitcoin forecast error rose from 1.77% MAPE at 7 days to 10.5% at 30 days, showing how errors build up over longer horizons."
+      ],
+      metrics: [ { value: "1.77%", label: "MAPE, 7 days" }, { value: "10.5%", label: "MAPE, 30 days" } ],
+      links: [] },
+    { id: "rl", track: "both", featured: false,
+      tag: "Ray RLlib · Gymnasium · Stable-Baselines3", period: "Autumn 2025",
+      title: "Deep Reinforcement Learning Agents",
+      lede: "Trained PPO agents on Atari games with Ray RLlib, and a behaviour cloning agent for MuJoCo HalfCheetah.",
+      points: [
+        "PPO with Ray RLlib on Atari Space Invaders: average episode return rose from 179 to 419 over 1M environment steps.",
+        "The same setup on Breakout over 600K steps, with frame skipping, grayscale and resizing wrappers.",
+        "Behaviour cloning on HalfCheetah from a 1,000-episode expert dataset, using the imitation library."
+      ],
+      metrics: [ { value: "419", label: "Space Invaders return" }, { value: "1M", label: "env steps" } ],
+      links: [] },
     { id: "titanic", track: "engineering", featured: false, tag: "ML · classification",
       title: "Titanic: ML from Disaster",
       lede: "Compared three classifiers on the Titanic passenger data.",
@@ -453,14 +490,29 @@ window.PORTFOLIO = {
       text: "International merit scholarship in Big Data and Machine Learning, world rank 30. Funded the full MSc at ITMO University." }
   ],
 
+  coursework: [
+    { tag: "Neural Network Architectures", title: "LLM prompting and fine-tuning",
+      text: "Qwen2.5-7B served with vLLM. Compared naive, few-shot, chain-of-thought and role prompting on BoolQ (chain-of-thought best, 0.61 accuracy vs 0.51 naive), then set up 4-bit LoRA fine-tuning with Unsloth." },
+    { tag: "Neural Network Architectures · Advanced ML", title: "Generative models from scratch",
+      text: "A diffusion text-to-image model with time embeddings and a U-Net, a DCGAN in PyTorch, and a convolutional VAE trained on the LFW faces dataset." },
+    { tag: "Advanced ML", title: "Interpretable credit-risk model",
+      text: "Logistic regression, random forest and XGBoost on the UCI credit-default data (XGBoost 0.76 ROC AUC), explained with SHAP, LIME and eli5." },
+    { tag: "Advanced ML", title: "SARIMA vs LSTM demand forecasting",
+      text: "Weekly store demand forecast over a 52-week horizon. SARIMA reached 7.88% MAPE and R² 0.78; a multi-step LSTM reached 14.6% and R² 0.12." },
+    { tag: "Optimisation Methods", title: "Combinatorial and multi-objective optimisation",
+      text: "0/1 knapsack with dynamic programming vs simulated annealing, and site selection with an exact ε-constraint method vs NSGA-II, without optimisation libraries." },
+    { tag: "Neural Network Architectures", title: "CNN from scratch in NumPy",
+      text: "Convolution and pooling layers with forward and backward passes, written without a deep learning framework." }
+  ],
+
   skills: [
     { group: "LLMs and agents", primary: true,
-      items: ["LangGraph","LangChain","LangSmith","OpenHands SDK","RAG","Auto-RAG","Multi-agent systems",
+      items: ["LangGraph","LangChain","LangSmith","Langfuse","OpenHands SDK","vLLM","Unsloth / LoRA","RAG","Auto-RAG","Multi-agent systems",
               "Agentic workflows","Hallucination detection","LLM evaluation","SWE-bench Lite",
               "Prompt engineering","Multimodal LLMs","Pydantic","ChromaDB","Pinecone","Embeddings"] },
     { group: "Machine learning", primary: true,
       items: ["Python","PyTorch","TensorFlow","Scikit-learn","Hugging Face Transformers","Deep learning",
-              "NLP","Deep autoencoders","Computer vision","Document AI / OCR","Model evaluation","Feature engineering"] },
+              "NLP","Deep autoencoders","Computer vision","Document AI / OCR","Model evaluation","Feature engineering","SHAP / LIME","Reinforcement learning","Ray RLlib","Stable-Baselines3","Diffusion models","SARIMA / statsmodels"] },
     { group: "Distributed data", primary: false,
       items: ["Apache Spark","Spark MLlib","Hadoop","Parquet","Fault-tolerant pipelines","Pandas","NumPy"] },
     { group: "Backend and tools", primary: false,

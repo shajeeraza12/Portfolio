@@ -382,7 +382,7 @@ h2{font-size:clamp(1.65rem,2.6vw,2.25rem);font-weight:750;letter-spacing:-.035em
 .pj-vis svg{height:100%;width:auto;max-width:100%}
 .pj .body{display:flex;flex-direction:column;flex:1}
 .pj .h3{margin:10px 0 8px}
-.metrics{display:flex;gap:26px;margin-top:16px}
+.metrics{display:flex;flex-wrap:wrap;gap:12px 26px;margin-top:16px}
 .metrics b{display:block;font:700 1.15rem var(--mono);color:var(--accent);letter-spacing:-.02em}
 .metrics span{font-size:.74rem;color:var(--text-3)}
 .pj .more{margin-top:auto}
@@ -675,19 +675,25 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="sec-body"><div class="pj-feat" id="pjFeat"></div><div class="grid3" id="pjRest"></div></div>
   </div></section>
 
+  <section class="sec" id="coursework"><div class="sec-grid">
+    <div class="sec-head rv"><div class="eyebrow"><span class="n">06</span>Coursework</div><h2>Selected coursework</h2>
+      <p class="sec-intro">Smaller pieces from my ITMO courses that show specific skills.</p></div>
+    <div class="sec-body"><div class="grid3" id="cwList"></div></div>
+  </div></section>
+
   <section class="sec" id="education"><div class="sec-grid">
-    <div class="sec-head rv"><div class="eyebrow"><span class="n">06</span>Education</div><h2>Education</h2>
+    <div class="sec-head rv"><div class="eyebrow"><span class="n">07</span>Education</div><h2>Education</h2>
       <p class="sec-intro">Certificates and transcripts are under each qualification.</p></div>
     <div class="sec-body"><div id="honours"></div><div class="grid2" id="eduList"></div></div>
   </div></section>
 
   <section class="sec" id="references"><div class="sec-grid">
-    <div class="sec-head rv"><div class="eyebrow"><span class="n">07</span>References</div><h2>Recommendation letters</h2></div>
+    <div class="sec-head rv"><div class="eyebrow"><span class="n">08</span>References</div><h2>Recommendation letters</h2></div>
     <div class="sec-body"><div class="grid4" id="refList"></div></div>
   </div></section>
 
   <section class="sec" id="documents"><div class="sec-grid">
-    <div class="sec-head rv"><div class="eyebrow"><span class="n">08</span>Documents</div><h2>All documents</h2>
+    <div class="sec-head rv"><div class="eyebrow"><span class="n">09</span>Documents</div><h2>All documents</h2>
       <p class="sec-intro">Every certificate, letter and report on the site, grouped by type. Search to find one quickly.</p></div>
     <div class="sec-body rv">
       <label class="vault-search" for="vq">
@@ -699,12 +705,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div></section>
 
   <section class="sec" id="skills"><div class="sec-grid">
-    <div class="sec-head rv"><div class="eyebrow"><span class="n">09</span>Skills</div><h2>Skills</h2></div>
+    <div class="sec-head rv"><div class="eyebrow"><span class="n">10</span>Skills</div><h2>Skills</h2></div>
     <div class="sec-body"><div class="grid4" id="skillList"></div></div>
   </div></section>
 
   <section class="sec" id="contact" style="border-bottom:none"><div class="sec-grid">
-    <div class="sec-head rv"><div class="eyebrow"><span class="n">10</span>Contact</div><h2>Contact</h2></div>
+    <div class="sec-head rv"><div class="eyebrow"><span class="n">11</span>Contact</div><h2>Contact</h2></div>
     <div class="sec-body"><div class="card contact rv" id="contactBox"></div></div>
   </div></section>
   </div>
@@ -768,7 +774,7 @@ function mono(k){var i=P.institutions[k]; if(!i) return '';
  return '<span class="mono" role="img" aria-label="'+esc(i.name)+'" style="background:linear-gradient(140deg,'+i.color+','+shade(i.color,-40)+')">'+esc(i.short)+'</span>';}
 
 /* ═══ NAV ═══ */
-var NAV=[['about','About'],['now','Now'],['research','Research'],['experience','Experience'],['projects','Projects'],
+var NAV=[['about','About'],['now','Now'],['research','Research'],['experience','Experience'],['projects','Projects'],['coursework','Coursework'],
  ['education','Education'],['references','References'],['documents','Documents'],['skills','Skills'],['contact','Contact']];
 var DESK=['research','experience','projects','education','documents','contact'];
 $('#nav').innerHTML=NAV.filter(function(n){return DESK.indexOf(n[0])>-1;}).map(function(n){return '<a href="#'+n[0]+'">'+n[1]+'</a>';}).join('');
@@ -949,8 +955,11 @@ $('#pjFeat').innerHTML=PJ.filter(function(p){return p.featured;}).map(function(p
   more('How it works',list(p.points),false)+'</div></article>';}).join('');
 $('#pjRest').innerHTML=PJ.filter(function(p){return !p.featured;}).map(function(p){
  return '<article class="card pad pj hov rv"><span class="tag">'+esc(p.tag)+'</span>'+(p.period?'<div class="meta" style="margin-top:6px">'+esc(p.period)+'</div>':'')+'<h3 class="h3">'+esc(p.title)+'</h3><p class="p">'+esc(p.lede)+'</p>'+
+  ((p.metrics||[]).length?'<div class="metrics">'+p.metrics.map(function(m){return '<div><b>'+esc(m.value)+'</b><span>'+esc(m.label)+'</span></div>';}).join('')+'</div>':'')+
   '<div class="spacer"></div>'+more('Details',list(p.points)+(p.links.length?'<div class="links">'+p.links.map(linkBtn).join('')+'</div>':''),false)+'</article>';}).join('');
 
+$('#cwList').innerHTML=(P.coursework||[]).map(function(c){
+ return '<article class="card pad hov rv"><span class="tag">'+esc(c.tag)+'</span><h3 class="h3" style="margin:10px 0 8px">'+esc(c.title)+'</h3><p class="p">'+esc(c.text)+'</p></article>';}).join('');
 /* ═══ EDUCATION ═══ */
 function docIcon(l){return /transcript|supplement/i.test(l)?I.pdf:/degree/i.test(l)?I.cap:I.cert;}
 $('#honours').innerHTML=(P.honours||[]).map(function(h){
