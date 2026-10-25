@@ -415,7 +415,6 @@ window.PORTFOLIO = {
       ],
       metrics: [ { value: "1.77%", label: "MAPE, 7 days" }, { value: "10.5%", label: "MAPE, 30 days" } ],
       shots: [
-        { src: "assets/results/timellm-btc.webp", cap: "Bitcoin: Time-LLM forecast (green) against actual prices (orange) over the last 30 days" },
         { src: "assets/results/timellm-nordpool.webp", cap: "Nord Pool electricity prices: history, test period and forecast" },
         { src: "assets/results/timellm-de.webp", cap: "German electricity prices: history, test period and forecast" }
       ],
@@ -528,11 +527,11 @@ window.PORTFOLIO = {
       text: "Qwen2.5-7B served with vLLM. Compared naive, few-shot, chain-of-thought and role prompting on BoolQ (chain-of-thought best, 0.61 accuracy vs 0.51 naive), then set up 4-bit LoRA fine-tuning with Unsloth." },
     { tag: "Neural Network Architectures · Advanced ML", title: "Generative models from scratch", img: "assets/results/cw-vae.webp", cap: "VAE on LFW faces: original, reconstruction, and the same face edited in latent space",
       text: "A diffusion text-to-image model with time embeddings and a U-Net, a DCGAN in PyTorch, and a convolutional VAE trained on the LFW faces dataset." },
-    { tag: "Advanced ML", title: "Interpretable credit-risk model", img: "assets/results/cw-shap.webp", cap: "SHAP summary: which features drive the default prediction",
+    { tag: "Advanced ML", title: "Interpretable credit-risk model", img: "assets/results/cw-shap.webp", cap: "Mean SHAP value per feature: recent repayment status (PAY_0) and credit limit drive the default prediction",
       text: "Logistic regression, random forest and XGBoost on the UCI credit-default data (XGBoost 0.76 ROC AUC), explained with SHAP, LIME and eli5." },
     { tag: "Advanced ML", title: "SARIMA vs LSTM demand forecasting", img: "assets/results/cw-sarima.webp", cap: "SARIMA (red) and LSTM (green) forecasts against actual weekly sales",
       text: "Weekly store demand forecast over a 52-week horizon. SARIMA reached 7.88% MAPE and R² 0.78; a multi-step LSTM reached 14.6% and R² 0.12." },
-    { tag: "Optimisation Methods", title: "Combinatorial and multi-objective optimisation", img: "assets/results/cw-pareto.webp", cap: "Pareto front: exact ε-constraint method vs NSGA-II",
+    { tag: "Optimisation Methods", title: "Combinatorial and multi-objective optimisation", img: "assets/results/cw-sa.webp", cap: "Simulated annealing reached 93–100% of the optimal knapsack value found by dynamic programming, for 20 to 62 items",
       text: "0/1 knapsack with dynamic programming vs simulated annealing, and site selection with an exact ε-constraint method vs NSGA-II, without optimisation libraries." },
     { tag: "Neural Network Architectures", title: "CNN from scratch in NumPy",
       text: "Convolution and pooling layers with forward and backward passes, written without a deep learning framework." }
